@@ -2,7 +2,7 @@ import express from "express"
 import { User } from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import getDataUri from "../utils/dataUri.js";
+import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 
 
