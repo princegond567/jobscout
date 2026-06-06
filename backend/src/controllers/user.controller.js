@@ -17,8 +17,13 @@ const register = async (req, res) => {
         };
 
         const file = req.file;
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content)
+        let profilePhoto = "";
+
+        if (file) {
+            const fileUri = getDataUri(file);
+            const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+            profilePhoto = cloudResponse.secure_url;
+        }
 
         const user = await User.findOne({ email })
 
@@ -30,7 +35,6 @@ const register = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10)
-
         await User.create({
             fullName,
             email,
@@ -38,7 +42,7 @@ const register = async (req, res) => {
             password: hashedPassword,
             role,
             profile:{
-                profilePhoto: cloudResponse.secure_url
+                profilePhoto
             }
         })
 
@@ -48,6 +52,10 @@ const register = async (req, res) => {
         })
     } catch (error) {
         console.log(error)
+        return res.status(500).json({
+            message: "Signup failed. Please try again.",
+            success: false
+        })
     }
 }
 
@@ -102,7 +110,14 @@ const login = async (req, res) => {
             profile: user.profile
         }
 
-        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, sameSize: "strict" }).json({
+        const cookieOptions = {
+            maxAge: 1 * 24 * 60 * 60 * 1000,
+            httpOnly: true,
+            sameSite: "strict",
+            secure: process.env.NODE_ENV === 'production'
+        };
+
+        return res.status(200).cookie("token", token, cookieOptions).json({
             message: `Welcome back ${user.fullName}`,
             user,
             success: true

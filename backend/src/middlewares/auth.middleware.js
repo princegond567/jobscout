@@ -22,7 +22,11 @@ const auth = async (req, res, next) => {
         req.id = decode.userId
         next()
     } catch (error) {
-        console.log(error)
+        console.error(error)
+        return res.status(401).json({
+            message: "Authentication failed",
+            success: false
+        })
     }
 }
 
