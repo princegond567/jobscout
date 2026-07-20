@@ -31,6 +31,7 @@ const Signup = () => {
     setInput({ ...input, file: e.target.files?.[0] });
   };
 
+  console.log("Ureeerr", USER_API_END_POINT);
   const submitHandler = async (e) => {
     e.preventDefault()
     const formData = new FormData();
