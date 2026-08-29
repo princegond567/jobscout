@@ -8,7 +8,7 @@ import { SlidersHorizontal, X } from 'lucide-react'
 const filterData = [
   {
     filterType: "Location",
-    array: ["Delhi NCR", "Banblore", "Hyderabad", "Pune", "Mumbai"]
+    array: ["Delhi NCR", "Bangalore", "Hyderabad", "Pune", "Mumbai"]
   },
   {
     filterType: "Industry",
