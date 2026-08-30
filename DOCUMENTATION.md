@@ -262,10 +262,3 @@ npm run dev
 
 
 ---
-
-If you want, I can now:
-- create a `DOCUMENTATION.md` (done) and `README.md` (also created),
-- add more detailed API tables (per-endpoint request/response examples),
-- generate OpenAPI/Swagger spec from detected routes.
-
-Tell me which next step you prefer.
