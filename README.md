@@ -39,8 +39,3 @@ Open the frontend in the browser (Vite default `http://localhost:5173`) and the 
 ## Notes
 - API base path: `/api/v1`
 - Authentication: JWT cookie stored under `token` (httpOnly). Ensure CORS and cookie domain are configured when deploying.
-
-If you'd like, I can:
-- generate a Swagger/OpenAPI spec from the routes,
-- add unit tests and CI pipeline, or
-- create a Postman collection for the API.
